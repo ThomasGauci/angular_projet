@@ -1,24 +1,35 @@
 <div id="assignments" class="container-fluid pt-4">
-    <div class="row center-div">
+    <div class="row">
+        <div class="col">
+            <p>PAGE ASSIGNEMENTS</p>
+        </div>
+    </div>
+    <div class="row">
         <form ngForm #assignmentForm class="form">
-            <mat-form-field>
-              Nom : <input matInput [(ngModel)]="nomDevoir" name="nom">
-            </mat-form-field>
-          
-            <mat-form-field appearance="fill">
-              <mat-label>Date de rendu</mat-label>
-              <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          
-            <button mat-stroked-button color="primary" [disabled]="!ajoutActive"
+            <div class="col">
+                <mat-form-field>
+                    Nom : <input matInput [(ngModel)]="nomDevoir" name="nom">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                <mat-label>Date de rendu</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col">
+               
+            </div>
+            <div class="col">
+                <button mat-stroked-button color="primary" [disabled]="!ajoutActive"
                     (click)="onSubmit($event); assignmentForm.reset();">
-              Ajouter un devoir
-            </button>
-          </form>
-          
-          <div *ngFor="let a of assignments">
+                    Ajouter un devoir
+                </button>
+            </div>   
+          </form> 
+    </div>
+    <div class="row">
+        <div *ngFor="let a of assignments">
             <p *ngIf="a.rendu; else nonsoumis" appRendu>
               {{a.nom}}, date de rendu : {{a.dateDeRendu | date}}. Rendu : {{a.rendu}}
             </p>
@@ -29,4 +40,5 @@
           
           </div>
     </div>
+    
 </div>
