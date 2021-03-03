@@ -1,1 +1,32 @@
-<p>assignments works!</p>
+<div id="assignments" class="container-fluid pt-4">
+    <div class="row center-div">
+        <form ngForm #assignmentForm class="form">
+            <mat-form-field>
+              Nom : <input matInput [(ngModel)]="nomDevoir" name="nom">
+            </mat-form-field>
+          
+            <mat-form-field appearance="fill">
+              <mat-label>Date de rendu</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          
+            <button mat-stroked-button color="primary" [disabled]="!ajoutActive"
+                    (click)="onSubmit($event); assignmentForm.reset();">
+              Ajouter un devoir
+            </button>
+          </form>
+          
+          <div *ngFor="let a of assignments">
+            <p *ngIf="a.rendu; else nonsoumis" appRendu>
+              {{a.nom}}, date de rendu : {{a.dateDeRendu | date}}. Rendu : {{a.rendu}}
+            </p>
+          
+            <ng-template #nonsoumis>
+              <p>{{a.nom}} NON RENDU ! , à rendre le {{a.dateDeRendu |date}}.</p>
+            </ng-template>
+          
+          </div>
+    </div>
+</div>
