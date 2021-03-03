@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div id="login" class="container-fluid pt-4">
+    <div class="row center-div">
+        <div class="col-12">
+            <!-- rajouter un loading -->
+            <div>
+                <div class="row">
+                    <form name="loginForm" novalidate>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Identifiant</mat-label>
+                            <input matInput [(ngModel)]="login" name="login" id="identifiant">
+                            <mat-icon matSuffix class="secondary-text">perm_identity</mat-icon>
+                            <mat-error >
+                                L'identifiant est nécessaire
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mot de passe a</mat-label>
+                            <input matInput type="password" [(ngModel)]="password" name="password" id="password">
+                            <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                            <mat-error>
+                                Le mot de passe  est nécessaire
+                            </mat-error>
+                        </mat-form-field>
+                        <button type="button" mat-raised-button color="accent" class="btn btn-success" (click)="connexion()" aria-label="LOG IN">
+                            CONNEXION
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
