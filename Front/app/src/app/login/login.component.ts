@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
   
   connexion(){
+    console.log(this.login);
     // En attendant : 
     this.router.navigate(['acceuil']);
     this.authentificationService.authentification(this.login,this.password).then(res => {
