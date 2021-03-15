@@ -44,6 +44,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssignmentsComponent } from './assignments/assignments.component'; 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { AssignmentsComponent } from './assignments/assignments.component';
 		MatTooltipModule,
 		MatTreeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+	HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
