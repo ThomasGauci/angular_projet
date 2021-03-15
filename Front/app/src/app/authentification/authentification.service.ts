@@ -16,7 +16,7 @@ export class AuthentificationService {
     params = login ? params.append('login', login.toString()) : params;
     params = password ? params.append('password', password.toString()) : params;
 
-    return this.http.get(this.url, {params, responseType: 'text'}).toPromise();
+    return this.http.get(this.url, {params}).toPromise();
   }
 
 }

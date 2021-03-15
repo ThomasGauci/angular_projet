@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from '../authentification/authentification.service';
 
@@ -22,15 +22,13 @@ export class LoginComponent implements OnInit {
   }
   
   connexion(){
+    console.log(this.login);
+    // En attendant : 
+    this.router.navigate(['acceuil']);
     this.authentificationService.authentification(this.login,this.password).then(res => {
+      console.log("retour servlet ", res);
       if(res == 'oui'){
         this.router.navigate(['acceuil']);
-      } else {
-        swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Le login ou le mot de passe est faux !',
-        })
       }
     });
   }
