@@ -94,6 +94,5 @@ export class AssignmentsComponent implements OnInit {
     this._snackBar.open("Devoir ajouter", "Fermer", {
       duration: 2000,
     });
-
   } 
 }

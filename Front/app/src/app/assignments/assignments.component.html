@@ -83,9 +83,11 @@
                                     <div *ngIf="element.noter == false">
                                         <span>Note obtenu : NON NOTE </span><br>
                                     </div>
-                                    <div *ngIf="element.noter == true">
-                                       <span> A FAIRE</span>
+                                    <div class="md-form" *ngIf="element.noter == true">
+                                        <input [(ngModel)]="note" type="number" class="form-control" mdbInput min="0" max="20">
+                                        <button mat-raised-button (click)="element.rendu = true" (click)="element.note = note" color="primary">Valider</button>
                                     </div>
+                                   
                                      
                                     <p>
                                       {{element.remarque}}
@@ -96,7 +98,7 @@
                                 <button mat-fab color="warn">
                                     <mat-icon>delete</mat-icon>
                                 </button>
-                                <button mat-raised-button (click)="element.noter = !element.noter" color="primary">Noter</button>
+                                <button mat-raised-button  (click)="element.noter = !element.noter" color="primary">Noter</button>
                                 <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>
                             </mat-card-actions>
                         </mat-card>
@@ -120,7 +122,6 @@
                               <img mat-card-image *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
                               <mat-card-content>
                                 <span>Date de rendu : {{element.dateDeRendu}} </span><br>
-                                <span>img : {{imgcours}}</span><br>
                                 <div [hidden]="!element.detail">
                                     <div *ngIf="element.note != undefined">
                                         <span>Note obtenu : {{element.note}}</span><br>
