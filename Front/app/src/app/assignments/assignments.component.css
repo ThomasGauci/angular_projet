@@ -1,0 +1,25 @@
+
+  .transition{
+    transition: 1s
+    }
+  .rendu-header-image {
+    background-image: url('https://i.pinimg.com/originals/a8/ab/c6/a8abc6117cbc3021060a9796b5579d26.jpg');
+    background-size: cover;
+  }
+
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    margin-bottom: 16px;
+}
+
+mat-card {
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+}
+
+mat-button-toggle-group {
+    margin-left: 12px;
+  }

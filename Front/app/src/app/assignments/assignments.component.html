@@ -41,6 +41,47 @@
           </div>
     </div>
 </div> -->
+
+    <!-- <div *ngFor="let a of assignments" >
+        <mat-grid-list cols="2" rowHeight="200px" [style.display]="renduVis==a.rendu ? 'block' : 'none'">
+            <mat-grid-tile>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div> -->
+
+    <div class="content">
+        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle (click)="renduVisible($event)" [disabled]="!renduVis" >Rendu</mat-button-toggle>
+            <mat-button-toggle (click)="renduVisible($event)" [disabled]="renduVis">Non Rendu</mat-button-toggle>
+          </mat-button-toggle-group>
+    </div>
+
+    <div class="content">
+        <mat-grid-list cols="4" rowHeight="1:1">
+        <div  *ngFor="let a of assignments">
+            <mat-grid-tile [style.display]="renduVis==a.rendu ? 'block' : 'none'" > 
+                <!-- <mat-grid-tile [style.visibility]="renduVis==a.rendu ? 'hidden': 'visible'"> -->
+                <mat-card class="example-card">
+                <mat-card-header  class="rendu-card">
+                    <div mat-card-avatar class="rendu-header-image"></div>
+                    <mat-card-title>{{a.nom}}</mat-card-title>
+                    <mat-card-subtitle> date de rendu : {{a.dateDeRendu | date}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="https://6.viki.io/image/44230fe166094d7db1e381499e5cbc9f.jpeg?s=900x600&e=t">
+                <mat-card-actions>
+                    <p *ngIf="a.rendu ; else nonsoumis" appRendu >Rendu : {{a.rendu}}</p>
+                
+                    <ng-template #nonsoumis>
+                        <p>{{a.nom}} NON RENDU ! , à rendre le {{a.dateDeRendu |date}}.</p>
+                    </ng-template>
+                </mat-card-actions>
+            </mat-card> 
+        </mat-grid-tile>     
+        </div>
+        </mat-grid-list>
+    </div>
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">

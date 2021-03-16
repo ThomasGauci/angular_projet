@@ -12,6 +12,7 @@ export class AssignmentsComponent implements OnInit {
  dateDeRendu = new Date();
 
  nomDevoir = '';
+ renduVis = true;
 
  assignments: Assignment[] = [
    {
@@ -60,6 +61,12 @@ export class AssignmentsComponent implements OnInit {
 
     this.assignments.push(nouvelAssignment);
 
+  }
+
+  renduVisible(event: {preventDefault: () => void;}) {
+    event.preventDefault();
+    console.log(this.renduVis);
+    this.renduVis = !this.renduVis ;
   }
 
 }
