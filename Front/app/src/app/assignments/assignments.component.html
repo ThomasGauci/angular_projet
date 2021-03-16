@@ -41,52 +41,62 @@
           </div>
     </div>
 </div> -->
-
-
+<div class="mat-app-background basic-container">
+</div>
 <div class="container">
-    <div class="row">
+    <div class="row pt-2">
         <div class="col-12">
             <mat-button-toggle-group [(ngModel)]="affichage" name="fenetre" aria-label="Font Style">
                 <mat-button-toggle [value]=1>Ajouter un devoir</mat-button-toggle>
                 <mat-button-toggle [value]=2>Afficher devoir rendu</mat-button-toggle>
-                <mat-button-toggle [value]=3>Afficher devoir non rendu</mat-button-toggle>
+                <mat-button-toggle   matBadge="8" matBadgePosition="before" matBadgeColor="accent" [value]=3>Afficher devoir non rendu</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
     </div>
     <div *ngIf="affichage == 1" class="row">
         <div class="col-5">
-            <mat-card>
-                <h1>Assignement</h1>
-                <form ngForm #assignmentForm class="form">
-                    <mat-form-field appearance="outline">
-                        <mat-label class="text-muted" >Nom</mat-label>
-                        <input matInput [(ngModel)]="nomDevoir" name="nom">
-                        <mat-icon matSuffix class="secondary-text material-icons color_white">perm_identity</mat-icon>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label class="text-muted" >Date de rendu</mat-label>
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label class="text-muted" >Auteur</mat-label>
-                        <input matInput [(ngModel)]="auteur" name="auteur">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label class="text-muted" >Note</mat-label>
-                        <input matInput [(ngModel)]="note" name="auteur">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label class="text-muted" >Image (en cours)</mat-label>
-                        <input matInput [(ngModel)]="image" name="auteur">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label class="text-muted" >Remarques</mat-label>
-                        <input matInput [(ngModel)]="remarque" name="remarque">
-                    </mat-form-field>
-                    <input type="button" [disabled]="!ajoutActive" (click)="add()" name="" value="Ajouter un devoir" href="#">
-                </form>
+            <mat-card class="assignement">
+                <mat-card-title>Assignement</mat-card-title>
+                <mat-card-content>
+                    <form ngForm #assignmentForm class="form">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Matières</mat-label>
+                            <mat-select [(ngModel)]="matiere">
+                              <mat-option *ngFor=" let matiere of matieres" [value]="matiere.image">{{matiere.title}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label class="text-muted" >Nom</mat-label>
+                            <input matInput [(ngModel)]="nomDevoir" name="nom">
+                            <mat-icon matSuffix class="secondary-text material-icons color_white">perm_identity</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label class="text-muted" >Date de rendu</mat-label>
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label class="text-muted" >Auteur</mat-label>
+                            <input matInput [(ngModel)]="auteur" name="auteur">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label class="text-muted" >Note</mat-label>
+                            <input matInput [(ngModel)]="note" name="auteur">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label class="text-muted" >Image (en cours)</mat-label>
+                            <input matInput [(ngModel)]="image" name="auteur">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label class="text-muted" >Remarques</mat-label>
+                            <input matInput [(ngModel)]="remarque" name="remarque">
+                        </mat-form-field>
+                    </form>
+                    <mat-card-actions>
+                        <button mat-raised-button (click)="add()" color="primary">Ajouter un devoir</button>
+                    </mat-card-actions>
+                </mat-card-content>
             </mat-card>
         </div>
     </div>
@@ -96,7 +106,10 @@
                 <div *ngIf="element.rendu">
                     <mat-card>
                         <div class="row">
-                            <span>{{element.nom}}</span>
+                            <mat-card>
+                                <mat-card-title>Devoir :</mat-card-title>
+                                <span>{{element.nom}}</span>
+                            </mat-card>
                         </div>
                         <div class="row">
                             <span>{{element.auteur}}</span>
@@ -105,7 +118,7 @@
                             <span>{{element.note}}</span>
                         </div>    
                         <div class="row">
-                            <span>{{element.image}}</span>
+                            <img [src]="element.image"/>
                         </div>    
                         <div class="row">
                             <span>{{element.remarque}}</span>
@@ -127,7 +140,6 @@
                             <span>{{element.auteur}}</span>
                         </div>  
                         <div class="row">
-
                             <div *ngIf="element.note == null">
                                 <mat-label class="text-muted" >Note</mat-label>
                                 <input matInput [(ngModel)]="element.note" name="note">

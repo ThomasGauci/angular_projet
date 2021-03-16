@@ -17,7 +17,9 @@ export class AssignmentsComponent implements OnInit {
  remarque = '';
  image = '';
  renduVis = true;
-
+ matiere = null;
+ matieres = [{title:'Anglais',image:'tt'},{title:'Français',image:'teet'}];
+ // Une image sera associée à chaque matière et une photo du prof
  assignments: Assignment[] = [
    {
      nom: 'Devoir Angular No1',
