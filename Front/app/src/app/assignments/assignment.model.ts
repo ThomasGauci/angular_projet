@@ -6,5 +6,6 @@ export class Assignment {
   image: string | undefined;
   note: number | undefined;
   remarque : string | undefined;
+  noter!: Boolean;
 
 }

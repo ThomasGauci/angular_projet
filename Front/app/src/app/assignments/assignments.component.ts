@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Assignment } from './assignment.model';
 
 @Component({
@@ -7,17 +8,14 @@ import { Assignment } from './assignment.model';
   styleUrls: ['./assignments.component.css']
 })
 export class AssignmentsComponent implements OnInit {
- // champs de formulaire
- ajoutActive = true;
- dateDeRendu = new Date();
- affichage = 1;
- nomDevoir = '';
- auteur = '';
- note = null;
- remarque = '';
- image = '';
- renduVis = true;
- matiere = null;
+  fenetre : number = 2;
+  dateDeRendu : Date = new Date();
+  nomDevoir : string = '';
+  auteur : string = '';
+  note : number | undefined = undefined;
+  matiere : string = ''
+  remarque : string = '';
+
  matieres = [{title:'Anglais',image:'tt'},{title:'Français',image:'teet'}];
  // Une image sera associée à chaque matière et une photo du prof
  assignments: Assignment[] = [
@@ -28,7 +26,8 @@ export class AssignmentsComponent implements OnInit {
      auteur: 'thomas',
      image: 'test',
      note: undefined,
-     remarque : 'aucune remarques'
+     remarque : 'aucune remarques',
+     noter: false
    },
    {
      nom: 'Devoir WebComponent',
@@ -37,7 +36,8 @@ export class AssignmentsComponent implements OnInit {
      auteur: 'thomas',
      image: 'test',
      note: 18,
-     remarque : 'aucune remarques'
+     remarque : 'aucune remarques',
+     noter: false
    },
    {
      nom: 'Devoir TLN Elena Cabrio',
@@ -45,35 +45,34 @@ export class AssignmentsComponent implements OnInit {
      rendu: false,
      auteur: 'thomas',
      image: 'test',
-     note: 18,
-     remarque : 'aucune remarques'
+     note: undefined,
+     remarque : 'aucune remarques',
+     noter: false
    },
  ];
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
-  add(){
-    console.log('Bouton cliqué');
-    console.log('Nom = ' + this.nomDevoir);
-    console.log('Date = ' + this.dateDeRendu);
+  changement(fenetre : number){
+    this.fenetre = fenetre;
+  }
 
+  add(){
     let nouvelAssignment = new Assignment();
     nouvelAssignment.nom = this.nomDevoir;
     nouvelAssignment.dateDeRendu = this.dateDeRendu;
     nouvelAssignment.rendu = false;
-    nouvelAssignment.auteur = 'test';
-    nouvelAssignment.image = 'image';
-    nouvelAssignment.remarque = 'remarque';
+    nouvelAssignment.noter = false;
+    nouvelAssignment.auteur = this.auteur;
+    //nouvelAssignment.image = 'image';
+    nouvelAssignment.remarque = this.remarque;
+    nouvelAssignment.note = this.note;
 
     this.assignments.push(nouvelAssignment);
+    this._snackBar.open("Devoir ajouter", "Fermer", {
+      duration: 2000,
+    });
   }
-
-  renduVisible(event: {preventDefault: () => void;}) {
-    event.preventDefault();
-    console.log(this.renduVis);
-    this.renduVis = !this.renduVis ;
-  }
-
 }
