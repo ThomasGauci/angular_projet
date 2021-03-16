@@ -16,10 +16,15 @@
 }
 
 mat-card {
+  overflow: auto;
   width: calc(100% - 30px);
   height: calc(100% - 30px);
 }
 
 mat-button-toggle-group {
     margin-left: 12px;
+  }
+
+  .example-header-image {
+    background-size: cover;
   }

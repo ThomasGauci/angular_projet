@@ -71,11 +71,11 @@
                     <div class="row pl-4 pt-2">
                         <mat-card>
                             <mat-card-header>
-                                <!-- <div mat-card-avatar  *ngIf="!!element.matiere" [ngStyle]="{'background': 'red'}" ></div> -->
+                                <div mat-card-avatar class="example-header-image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}"></div>
                                 <mat-card-title>{{element.nom}}</mat-card-title>
                                 <mat-card-subtitle>{{element.auteur}}</mat-card-subtitle>
                               </mat-card-header>
-                              <img mat-card-image *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
+                              <img mat-card-image  *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
                               <mat-card-content>
                                 <span>Matiere : {{element.titre}} </span><br>
                                 <span>Date de rendu : {{element.dateDeRendu}} </span><br>
@@ -113,7 +113,7 @@
                     <div class="row pl-4 pt-2">
                         <mat-card>
                             <mat-card-header>
-                                <!-- <div mat-card-avatar ></div> -->
+                                <div mat-card-avatar class="example-header-image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}"></div>
                                 <mat-card-title>{{element.auteur}}</mat-card-title>
                                 <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
                               </mat-card-header>
