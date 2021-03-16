@@ -71,13 +71,13 @@
                     <div class="row pl-4 pt-2">
                         <mat-card>
                             <mat-card-header>
-                                <!-- <div mat-card-avatar [ngStyle]="{'background-image': 'url('+ /assets/matieres/gestondeprojet.jpg +')'}" ></div> -->
-                                <mat-card-title>{{element.auteur}}</mat-card-title>
-                                <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
+                                <!-- <div mat-card-avatar  *ngIf="!!element.matiere" [ngStyle]="{'background': 'red'}" ></div> -->
+                                <mat-card-title>{{element.nom}}</mat-card-title>
+                                <mat-card-subtitle>{{element.auteur}}</mat-card-subtitle>
                               </mat-card-header>
-                              <!-- <img mat-card-image src=getImageCours(element.matiere) alt="cours"> -->
+                              <img mat-card-image *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
                               <mat-card-content>
-                                <span>Titre de la matiere : {{element.titre}} </span><br>
+                                <span>Matiere : {{element.titre}} </span><br>
                                 <span>Date de rendu : {{element.dateDeRendu}} </span><br>
                                 <div [hidden]="!element.detail">
                                     <div *ngIf="element.noter == false">
@@ -113,13 +113,14 @@
                     <div class="row pl-4 pt-2">
                         <mat-card>
                             <mat-card-header>
-                                <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + getImageProf( element.titre) + ')'}" ></div>
+                                <!-- <div mat-card-avatar ></div> -->
                                 <mat-card-title>{{element.auteur}}</mat-card-title>
                                 <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
                               </mat-card-header>
-                              <!-- <img mat-card-image src={{element.imagecours}} alt="cours"> -->
+                              <img mat-card-image *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
                               <mat-card-content>
                                 <span>Date de rendu : {{element.dateDeRendu}} </span><br>
+                                <span>img : {{imgcours}}</span><br>
                                 <div [hidden]="!element.detail">
                                     <div *ngIf="element.note != undefined">
                                         <span>Note obtenu : {{element.note}}</span><br>

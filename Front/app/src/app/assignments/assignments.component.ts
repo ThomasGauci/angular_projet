@@ -8,6 +8,9 @@ import { Assignment } from './assignment.model';
   templateUrl: './assignments.component.html',
   styleUrls: ['./assignments.component.css']
 })
+
+
+
 export class AssignmentsComponent implements OnInit {
   fenetre : number = 2;
   dateDeRendu : Date = new Date();
@@ -16,6 +19,8 @@ export class AssignmentsComponent implements OnInit {
   note : number | undefined = undefined;
   remarque : string = '';
   matiere : string = '';
+  imgcours : string ='';
+  imgprof : string ='';
 
  matieres = [{title:'Analyse des sentiments',imagecours:'/assets/matieres/analysesentiment.jpg', imageprof : '/assets/prof/Villata.jpg'}
 ,{title:'Gestion de projet',imagecours:'/assets/matieres/gestondeprojet.jpg', imageprof : '/assets/prof/Michel-Winter.jpg'}
@@ -61,6 +66,11 @@ export class AssignmentsComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    let _ = this
+    this.assignments = this.assignments.map((a : Assignment) => {
+      a.matiere = _.matieres.find((m:any)=> a.titre.toLocaleLowerCase().trim()=== m.title.toLocaleLowerCase().trim())    
+      return a;
+    });
   }
 
   changement(fenetre : number){
@@ -78,19 +88,12 @@ export class AssignmentsComponent implements OnInit {
     detail : false,
     auteur : this.auteur,
     remarque : this.remarque,
-    note : this.note
+    note : this.note,
     };
     this.assignments.push(nouvelAssignment);
     this._snackBar.open("Devoir ajouter", "Fermer", {
       duration: 2000,
     });
-  }
 
-  getImageCours(titre : String){
-    this.matieres.find(res => { res.title == titre; return res.imagecours ;} );
-  }
-
-  getImageProf(titre : String){
-    this.matieres.find(res => { res.title == titre; return res.imageprof ;} );
-  }
+  } 
 }
