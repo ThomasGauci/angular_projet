@@ -18,7 +18,7 @@
                     <mat-form-field  appearance="outline">
                         <mat-label>Matières</mat-label>
                         <mat-select [(ngModel)]="matiere">
-                          <mat-option *ngFor=" let matiere of matieres" [value]="matiere.image">{{matiere.title}}</mat-option>
+                          <mat-option *ngFor=" let matiere of matieres" [value]="matiere.title" >{{matiere.title}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                 </div>
@@ -71,11 +71,13 @@
                     <div class="row pl-4 pt-2">
                         <mat-card>
                             <mat-card-header>
-                                <div mat-card-avatar class="example-header-image"></div>
+                                <!-- <div mat-card-avatar [ngStyle]="{'background-image': 'url('+ /assets/matieres/gestondeprojet.jpg +')'}" ></div> -->
                                 <mat-card-title>{{element.auteur}}</mat-card-title>
                                 <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
                               </mat-card-header>
+                              <!-- <img mat-card-image src=getImageCours(element.matiere) alt="cours"> -->
                               <mat-card-content>
+                                <span>Titre de la matiere : {{element.titre}} </span><br>
                                 <span>Date de rendu : {{element.dateDeRendu}} </span><br>
                                 <div [hidden]="!element.detail">
                                     <div *ngIf="element.noter == false">
@@ -111,10 +113,11 @@
                     <div class="row pl-4 pt-2">
                         <mat-card>
                             <mat-card-header>
-                                <div mat-card-avatar class="example-header-image"></div>
+                                <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + getImageProf( element.titre) + ')'}" ></div>
                                 <mat-card-title>{{element.auteur}}</mat-card-title>
                                 <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
                               </mat-card-header>
+                              <!-- <img mat-card-image src={{element.imagecours}} alt="cours"> -->
                               <mat-card-content>
                                 <span>Date de rendu : {{element.dateDeRendu}} </span><br>
                                 <div [hidden]="!element.detail">

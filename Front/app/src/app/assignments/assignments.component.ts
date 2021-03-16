@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Assignment } from './assignment.model';
@@ -13,29 +14,33 @@ export class AssignmentsComponent implements OnInit {
   nomDevoir : string = '';
   auteur : string = '';
   note : number | undefined = undefined;
-  matiere : string = ''
   remarque : string = '';
+  matiere : string = '';
 
- matieres = [{title:'Anglais',image:'tt'},{title:'Français',image:'teet'}];
- // Une image sera associée à chaque matière et une photo du prof
+ matieres = [{title:'Analyse des sentiments',imagecours:'/assets/matieres/analysesentiment.jpg', imageprof : '/assets/prof/Villata.jpg'}
+,{title:'Gestion de projet',imagecours:'/assets/matieres/gestondeprojet.jpg', imageprof : '/assets/prof/Michel-Winter.jpg'}
+,{title:'Recherche d\'informations',imagecours:'/assets/matieres/rechercheinfo.jpg', imageprof : '/assets/prof/Elena-Cabrio.jpg'}
+,{title:'Web',imagecours:'/assets/matieres/web.jpg', imageprof : '/assets/prof/Michel-Buffa.jpg'}
+,{title:'Simulation de gestion',imagecours:'/assets/matieres/simulationgestion.jpg', imageprof : '/assets/prof/Stéphane-Tounsi.jpg'}];
+
+
  assignments: Assignment[] = [
    {
      nom: 'Devoir Angular No1',
+     titre :'Simulation de gestion',
      dateDeRendu: new Date('02-20-2021'),
      rendu: false,
      auteur: 'thomas',
-     image: 'test',
-     note: undefined,
      remarque : 'aucune remarques',
      noter: false,
      detail: false
    },
    {
      nom: 'Devoir WebComponent',
+     titre :'web',
      dateDeRendu: new Date('01-26-2021'),
      rendu: true,
      auteur: 'thomas',
-     image: 'test',
      note: 18,
      remarque : 'aucune remarques',
      noter: false,
@@ -43,10 +48,10 @@ export class AssignmentsComponent implements OnInit {
    },
    {
      nom: 'Devoir TLN Elena Cabrio',
+     titre :'web',
      dateDeRendu: new Date('01-30-2021'),
      rendu: false,
      auteur: 'thomas',
-     image: 'test',
      note: undefined,
      remarque : 'aucune remarques',
      noter: false,
@@ -62,21 +67,30 @@ export class AssignmentsComponent implements OnInit {
     this.fenetre = fenetre;
   }
 
-  add(){
-    let nouvelAssignment = new Assignment();
-    nouvelAssignment.nom = this.nomDevoir;
-    nouvelAssignment.dateDeRendu = this.dateDeRendu;
-    nouvelAssignment.rendu = false;
-    nouvelAssignment.noter = false;
-    nouvelAssignment.detail = false;
-    nouvelAssignment.auteur = this.auteur;
-    //nouvelAssignment.image = 'image';
-    nouvelAssignment.remarque = this.remarque;
-    nouvelAssignment.note = this.note;
 
+  add(){
+    let nouvelAssignment : Assignment = {
+    titre : this.matiere,
+    nom : this.nomDevoir,
+    dateDeRendu : this.dateDeRendu,
+    rendu : false,
+    noter : false,
+    detail : false,
+    auteur : this.auteur,
+    remarque : this.remarque,
+    note : this.note
+    };
     this.assignments.push(nouvelAssignment);
     this._snackBar.open("Devoir ajouter", "Fermer", {
       duration: 2000,
     });
+  }
+
+  getImageCours(titre : String){
+    this.matieres.find(res => { res.title == titre; return res.imagecours ;} );
+  }
+
+  getImageProf(titre : String){
+    this.matieres.find(res => { res.title == titre; return res.imageprof ;} );
   }
 }
