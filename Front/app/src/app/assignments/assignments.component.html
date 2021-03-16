@@ -42,12 +42,6 @@
     </div>
 </div> -->
 
-    <!-- <div *ngFor="let a of assignments" >
-        <mat-grid-list cols="2" rowHeight="200px" [style.display]="renduVis==a.rendu ? 'block' : 'none'">
-            <mat-grid-tile>
-            </mat-grid-tile>
-        </mat-grid-list>
-    </div> -->
 
 <div class="container">
     <div class="row">
@@ -133,7 +127,7 @@
                             <span>{{element.auteur}}</span>
                         </div>  
                         <div class="row">
-                            <!-- a modifier-->
+
                             <div *ngIf="element.note == null">
                                 <mat-label class="text-muted" >Note</mat-label>
                                 <input matInput [(ngModel)]="element.note" name="note">

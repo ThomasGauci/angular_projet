@@ -10,7 +10,7 @@ export class AssignmentsComponent implements OnInit {
  // champs de formulaire
  ajoutActive = true;
  dateDeRendu = new Date();
-  affichage = 1
+ affichage = 1;
  nomDevoir = '';
  auteur = '';
  note = null;
