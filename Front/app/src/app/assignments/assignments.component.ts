@@ -26,6 +26,11 @@ export class AssignmentsComponent implements OnInit {
      rendu: true,
    },
    {
+    nom: 'Devoir huet',
+    dateDeRendu: new Date('03-10-2021'),
+    rendu: true,
+  },
+   {
      nom: 'Devoir TLN Elena Cabrio',
      dateDeRendu: new Date('01-30-2021'),
      rendu: false,
