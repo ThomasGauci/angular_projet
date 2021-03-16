@@ -27,7 +27,8 @@ export class AssignmentsComponent implements OnInit {
      image: 'test',
      note: undefined,
      remarque : 'aucune remarques',
-     noter: false
+     noter: false,
+     detail: false
    },
    {
      nom: 'Devoir WebComponent',
@@ -37,7 +38,8 @@ export class AssignmentsComponent implements OnInit {
      image: 'test',
      note: 18,
      remarque : 'aucune remarques',
-     noter: false
+     noter: false,
+     detail: false
    },
    {
      nom: 'Devoir TLN Elena Cabrio',
@@ -47,7 +49,8 @@ export class AssignmentsComponent implements OnInit {
      image: 'test',
      note: undefined,
      remarque : 'aucune remarques',
-     noter: false
+     noter: false,
+     detail: false
    },
  ];
   constructor(private _snackBar: MatSnackBar) { }
@@ -65,6 +68,7 @@ export class AssignmentsComponent implements OnInit {
     nouvelAssignment.dateDeRendu = this.dateDeRendu;
     nouvelAssignment.rendu = false;
     nouvelAssignment.noter = false;
+    nouvelAssignment.detail = false;
     nouvelAssignment.auteur = this.auteur;
     //nouvelAssignment.image = 'image';
     nouvelAssignment.remarque = this.remarque;

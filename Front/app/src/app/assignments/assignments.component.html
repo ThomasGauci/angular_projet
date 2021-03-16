@@ -76,22 +76,26 @@
                                 <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
                               </mat-card-header>
                               <mat-card-content>
-                                <div *ngIf="element.noter == false">
-                                    <span>Note obtenu : NON NOTE </span><br>
+                                <span>Date de rendu : {{element.dateDeRendu}} </span><br>
+                                <div [hidden]="!element.detail">
+                                    <div *ngIf="element.noter == false">
+                                        <span>Note obtenu : NON NOTE </span><br>
+                                    </div>
+                                    <div *ngIf="element.noter == true">
+                                       <span> A FAIRE</span>
+                                    </div>
+                                     
+                                    <p>
+                                      {{element.remarque}}
+                                    </p>
                                 </div>
-                                <div *ngIf="element.noter == true">
-                                   <span> A FAIRE</span>
-                                </div>
-                                  <span>Date de rendu : {{element.dateDeRendu}} </span><br>
-                                <p>
-                                  {{element.remarque}}
-                                </p>
                               </mat-card-content>
                               <mat-card-actions>
                                 <button mat-fab color="warn">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                                 <button mat-raised-button (click)="element.noter = !element.noter" color="primary">Noter</button>
+                                <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>
                             </mat-card-actions>
                         </mat-card>
                     </div>
@@ -112,21 +116,21 @@
                                 <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
                               </mat-card-header>
                               <mat-card-content>
-                                <div *ngIf="element.note == undefined">
-                                    <span>Note obtenu : NON NOTE </span><br>
-                                </div>
-                                <div *ngIf="element.note != undefined">
-                                    <span>Note obtenu : {{element.note}} </span><br>
-                                </div>
                                 <span>Date de rendu : {{element.dateDeRendu}} </span><br>
-                                <p>
-                                  {{element.remarque}}
-                                </p>
+                                <div [hidden]="!element.detail">
+                                    <div *ngIf="element.note != undefined">
+                                        <span>Note obtenu : {{element.note}}</span><br>
+                                    </div>
+                                    <p>
+                                      {{element.remarque}}
+                                    </p>
+                                </div>
                               </mat-card-content>
                             <mat-card-actions>
                                 <button mat-fab color="warn">
                                     <mat-icon>delete</mat-icon>
                                 </button>
+                                <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>
                             </mat-card-actions>
                         </mat-card>
                     </div>

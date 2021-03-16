@@ -7,5 +7,6 @@ export class Assignment {
   note: number | undefined;
   remarque : string | undefined;
   noter!: Boolean;
+  detail!: Boolean;
 
 }
