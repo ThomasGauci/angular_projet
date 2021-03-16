@@ -247,3 +247,9 @@ input, select, textarea{
 textarea:focus, input:focus {
     color: #ffffff;
 }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 100px;
+}

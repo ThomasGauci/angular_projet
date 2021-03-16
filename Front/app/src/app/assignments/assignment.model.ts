@@ -1,5 +1,10 @@
 export class Assignment {
-  nom!: string;
-  dateDeRendu!: Date;
+  nom : string | undefined;
+  dateDeRendu: Date | undefined;
   rendu?: boolean;
+  auteur: string | undefined;
+  image: string | undefined;
+  note: number | undefined;
+  remarque : string | undefined;
+
 }
