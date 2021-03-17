@@ -78,7 +78,7 @@
                               <img mat-card-image  *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
                               <mat-card-content>
                                 <span>Matiere : {{element.titre}} </span><br>
-                                <span>Date de rendu : {{element.dateDeRendu}} </span><br>
+                                <span >Date de rendu : {{element.dateDeRendu | date}} </span><br>
                                 <div [hidden]="!element.detail">
                                     <div *ngIf="element.noter == false">
                                         <span>Note obtenu : NON NOTE </span><br>
@@ -121,10 +121,10 @@
                               </mat-card-header>
                               <img mat-card-image *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
                               <mat-card-content>
-                                <span>Date de rendu : {{element.dateDeRendu}} </span><br>
+                                <span>Date de rendu : {{element.dateDeRendu | date }} </span><br>
                                 <div [hidden]="!element.detail">
                                     <div *ngIf="element.note != undefined">
-                                        <span>Note obtenu : {{element.note}}</span><br>
+                                        <span>Note obtenu : {{element.note}}/20</span><br>
                                     </div>
                                     <p>
                                       {{element.remarque}}
