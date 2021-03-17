@@ -1,4 +1,5 @@
 
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AssignementService } from '../assignementService/assignement.service';
@@ -76,7 +77,6 @@ export class AssignmentsComponent implements OnInit {
     // });
 
     this.loadAssignement();
-    this.imgtocompenent();
   }
 
   changement(fenetre : number){
@@ -86,6 +86,7 @@ export class AssignmentsComponent implements OnInit {
   loadAssignement(){
     this.assignementService.get().then(async res => {
       this.assignments = (await res);
+      this.imgtocompenent();
     })
   }
 
@@ -93,7 +94,7 @@ export class AssignmentsComponent implements OnInit {
     let nouvelAssignment : Assignment = {
     titre : this.matiere,
     nom : this.nomDevoir,
-    dateDeRendu : this.dateDeRendu,
+    dateDeRendu :  this.dateDeRendu,
     rendu : false,
     noter : false,
     detail : false,
@@ -140,7 +141,6 @@ export class AssignmentsComponent implements OnInit {
         this._snackBar.open("Devoir supprimé", "Fermer", {
           duration: 2000,
         });
-        this.loadAssignement();
       } else {
         this._snackBar.open("Erreur lors de la suppression du devoir", "Fermer", {
           duration: 2000,
@@ -156,7 +156,6 @@ export class AssignmentsComponent implements OnInit {
         this._snackBar.open("Devoir mis à jour", "Fermer", {
           duration: 2000,
         });
-        this.loadAssignement();
       } else {
         this._snackBar.open("Erreur lors de la maj du devoir", "Fermer", {
           duration: 2000,
