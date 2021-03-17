@@ -101,7 +101,7 @@ export class AssignmentsComponent implements OnInit {
     remarque : this.remarque,
     note : this.note,
     };
-    if(this.note != null){
+    if(this.note != ''){
       nouvelAssignment.rendu = true;
       nouvelAssignment.noter = true;
     }
