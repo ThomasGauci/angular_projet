@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="md-form" *ngIf="element.noter == true">
                                         <input [(ngModel)]="note" type="number" class="form-control" mdbInput min="0" max="20">
-                                        <button mat-raised-button (click)="element.rendu = true" (click)="element.note = note" color="primary">Valider</button>
+                                        <button mat-raised-button (click)="update(element,note)" (click)="element.rendu = true" (click)="element.note = note" color="primary">Valider</button>
                                     </div>
                                    
                                      
@@ -95,10 +95,10 @@
                                 </div>
                               </mat-card-content>
                               <mat-card-actions>
-                                <button mat-fab color="warn">
+                                <button (click)="delete(element)" mat-fab color="warn">
                                     <mat-icon>delete</mat-icon>
                                 </button>
-                                <button mat-raised-button  (click)="element.noter = !element.noter" color="primary">Noter</button>
+                                <button [hidden]="!element.detail" mat-raised-button  (click)="element.noter = !element.noter" color="primary">Noter</button>
                                 <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>
                             </mat-card-actions>
                         </mat-card>
@@ -132,7 +132,7 @@
                                 </div>
                               </mat-card-content>
                             <mat-card-actions>
-                                <button class="btn" mat-fab color="warn">
+                                <button (click)="delete(element)" class="btn" mat-fab color="warn">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                                 <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>

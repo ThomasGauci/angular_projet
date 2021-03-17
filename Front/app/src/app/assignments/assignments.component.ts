@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AssignementService } from '../assignementService/assignement.service';
 import { Assignment } from './assignment.model';
 
 @Component({
@@ -12,23 +13,23 @@ import { Assignment } from './assignment.model';
 
 
 export class AssignmentsComponent implements OnInit {
-  fenetre : number = 2;
+  fenetre : number = 1;
   dateDeRendu : Date = new Date();
   nomDevoir : string = '';
   auteur : string = '';
-  note : number | undefined = undefined;
+  note : string = '';
   remarque : string = '';
   matiere : string = '';
   imgcours : string ='';
   imgprof : string ='';
-
+  assignments: Array<Assignment> = [];
  matieres = [{title:'Analyse des sentiments',imagecours:'/assets/matieres/analysesentiment.jpg', imageprof : '/assets/prof/Serena-Villata.jpg'}
 ,{title:'Gestion de projet',imagecours:'/assets/matieres/gestondeprojet.jpg', imageprof : '/assets/prof/Michel-Winter.jpg'}
 ,{title:'Recherche d\'informations',imagecours:'/assets/matieres/rechercheinfo.jpg', imageprof : '/assets/prof/Elena-Cabrio.jpg'}
 ,{title:'Web',imagecours:'/assets/matieres/web.jpg', imageprof : '/assets/prof/Michel-Buffa.jpg'}
 ,{title:'Simulation de gestion',imagecours:'/assets/matieres/simulationgestion.jpg', imageprof : '/assets/prof/Stéphane-Tounsi.jpg'}];
 
-
+/*
  assignments: Assignment[] = [
    {
      nom: 'Devoir Angular No1',
@@ -62,8 +63,8 @@ export class AssignmentsComponent implements OnInit {
      noter: false,
      detail: false
    },
- ];
-  constructor(private _snackBar: MatSnackBar) { }
+ ];*/
+  constructor(private _snackBar: MatSnackBar, private assignementService: AssignementService) { }
 
   ngOnInit(): void {
     // let _ = this
@@ -74,13 +75,19 @@ export class AssignmentsComponent implements OnInit {
     //   return a;
     // });
 
-    this.imgtocompenent()
+    this.loadAssignement();
+    this.imgtocompenent();
   }
 
   changement(fenetre : number){
     this.fenetre = fenetre;
   }
 
+  loadAssignement(){
+    this.assignementService.get().then(async res => {
+      this.assignments = (await res);
+    })
+  }
 
   add(){
     let nouvelAssignment : Assignment = {
@@ -94,12 +101,24 @@ export class AssignmentsComponent implements OnInit {
     remarque : this.remarque,
     note : this.note,
     };
-    
+    if(this.note != null){
+      nouvelAssignment.rendu = true;
+      nouvelAssignment.noter = true;
+    }
     this.assignments.push(nouvelAssignment);
-    this._snackBar.open("Devoir ajouter", "Fermer", {
-      duration: 2000,
+    
+    this.imgtocompenent();
+    this.assignementService.add(nouvelAssignment.titre,nouvelAssignment.nom,nouvelAssignment.dateDeRendu,nouvelAssignment.rendu,nouvelAssignment.noter,nouvelAssignment.detail,nouvelAssignment.auteur,nouvelAssignment.remarque,nouvelAssignment.note).then( res => {
+      if(res == "oui"){
+        this._snackBar.open("Devoir ajouter", "Fermer", {
+          duration: 2000,
+        });
+      } else {
+        this._snackBar.open("Erreur lors de l'ajout du devoir", "Fermer", {
+          duration: 2000,
+        });
+      }
     });
-    this.imgtocompenent()
   } 
 
 
@@ -112,5 +131,37 @@ export class AssignmentsComponent implements OnInit {
       return a;
     });
   }
-  
+
+  delete(element : Assignment){
+    console.log("delete")
+    this.assignementService.delete(element.titre,element.nom,element.dateDeRendu,element.rendu,element.noter,element.detail,element.auteur,element.remarque,element.note).then( res => {
+      if(res == "oui"){
+        this.assignments.splice(this.assignments.indexOf(element),1);
+        this._snackBar.open("Devoir supprimé", "Fermer", {
+          duration: 2000,
+        });
+        this.loadAssignement();
+      } else {
+        this._snackBar.open("Erreur lors de la suppression du devoir", "Fermer", {
+          duration: 2000,
+        });
+      }
+    });
+  }
+
+  update(element : Assignment, note : string){
+    console.log("update", note)
+    this.assignementService.update(element.titre,element.nom,element.dateDeRendu,true,true,element.detail,element.auteur,element.remarque,note).then( res => {
+      if(res == "oui"){
+        this._snackBar.open("Devoir mis à jour", "Fermer", {
+          duration: 2000,
+        });
+        this.loadAssignement();
+      } else {
+        this._snackBar.open("Erreur lors de la maj du devoir", "Fermer", {
+          duration: 2000,
+        });
+      }
+    });
+  }
 }

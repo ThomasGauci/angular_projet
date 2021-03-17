@@ -5,7 +5,7 @@ export class Assignment {
   dateDeRendu: Date | undefined;
   rendu?: boolean;
   auteur: string | undefined;
-  note?: number ;
+  note?: string ;
   remarque : string | undefined;
   noter!: Boolean;
   detail!: Boolean;
