@@ -22,7 +22,7 @@ export class AssignmentsComponent implements OnInit {
   imgcours : string ='';
   imgprof : string ='';
 
- matieres = [{title:'Analyse des sentiments',imagecours:'/assets/matieres/analysesentiment.jpg', imageprof : '/assets/prof/Villata.jpg'}
+ matieres = [{title:'Analyse des sentiments',imagecours:'/assets/matieres/analysesentiment.jpg', imageprof : '/assets/prof/Serena-Villata.jpg'}
 ,{title:'Gestion de projet',imagecours:'/assets/matieres/gestondeprojet.jpg', imageprof : '/assets/prof/Michel-Winter.jpg'}
 ,{title:'Recherche d\'informations',imagecours:'/assets/matieres/rechercheinfo.jpg', imageprof : '/assets/prof/Elena-Cabrio.jpg'}
 ,{title:'Web',imagecours:'/assets/matieres/web.jpg', imageprof : '/assets/prof/Michel-Buffa.jpg'}
@@ -66,11 +66,15 @@ export class AssignmentsComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    let _ = this
-    this.assignments = this.assignments.map((a : Assignment) => {
-      a.matiere = _.matieres.find((m:any)=> a.titre.toLocaleLowerCase().trim()=== m.title.toLocaleLowerCase().trim())    
-      return a;
-    });
+    // let _ = this
+    // this.assignments = this.assignments.map((a : Assignment) => {
+    //   console.log(a.matiere)
+    //   a.matiere = _.matieres.find((m:any)=> a.titre.toLocaleLowerCase().trim()=== m.title.toLocaleLowerCase().trim())    
+    //   console.log(a.titre)
+    //   return a;
+    // });
+
+    this.imgtocompenent()
   }
 
   changement(fenetre : number){
@@ -90,9 +94,23 @@ export class AssignmentsComponent implements OnInit {
     remarque : this.remarque,
     note : this.note,
     };
+    
     this.assignments.push(nouvelAssignment);
     this._snackBar.open("Devoir ajouter", "Fermer", {
       duration: 2000,
     });
+    this.imgtocompenent()
   } 
+
+
+  imgtocompenent(){
+    let _ = this
+    this.assignments = this.assignments.map((a : Assignment) => {
+      console.log(a.matiere)
+      a.matiere = _.matieres.find((m:any)=> a.titre.toLocaleLowerCase().trim()=== m.title.toLocaleLowerCase().trim())    
+      console.log(a.titre)
+      return a;
+    });
+  }
+  
 }
