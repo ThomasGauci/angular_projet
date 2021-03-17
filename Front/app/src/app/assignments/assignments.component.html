@@ -1,4 +1,4 @@
-<div class="row" style="height:100%">
+<div class="onglets" class="row" style="height:100%">
     <div class="col pl-5 pt-4">
         <div class="row">
             <button (click)="changement(1)" mat-raised-button>Ajouter un devoir</button>
@@ -10,9 +10,9 @@
             <button (click)="changement(3)" mat-raised-button>Devoir rendu</button>
         </div>
     </div>
-    <div *ngIf="fenetre==1" class="col-10 pt-4" style="height:100%">
+    <div  *ngIf="fenetre==1" class="col-10 pt-4" style="height:100%">
         <mat-card>
-            <mat-card-title>Ajout d'un devoir</mat-card-title>
+            <!-- <mat-card-title>Ajout d'un devoir</mat-card-title> -->
             <div class="row">
                 <div class="col pt-4 pl-4">
                     <mat-form-field  appearance="outline">
@@ -64,11 +64,11 @@
         </mat-card>
     </div>
     <div *ngIf="fenetre==2" class="col-10 pt-4" style="height:100%">
-        <mat-card>
-            <mat-card-title>Devoir non rendu</mat-card-title>
-            <div *ngFor="let element of assignments">
+        <mat-card class="transparentback">
+            <!-- <mat-card-title>Devoir non rendu</mat-card-title> -->
+            <div  *ngFor="let element of assignments">
                 <div *ngIf="!element.rendu">
-                    <div class="row pl-4 pt-2">
+                    <div class="row pl-4 pt-2" >
                         <mat-card>
                             <mat-card-header>
                                 <div mat-card-avatar class="example-header-image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}"></div>
@@ -108,8 +108,8 @@
         </mat-card>
     </div>
     <div *ngIf="fenetre==3" class="col-10 pt-4" style="height:100%">
-        <mat-card>
-            <mat-card-title>Devoir rendu</mat-card-title>
+        <mat-card class="transparentback">
+            <!-- <mat-card-title>Devoir rendu</mat-card-title> -->
             <div *ngFor="let element of assignments">
                 <div *ngIf="element.rendu">
                     <div class="row pl-4 pt-2">
@@ -132,7 +132,7 @@
                                 </div>
                               </mat-card-content>
                             <mat-card-actions>
-                                <button mat-fab color="warn">
+                                <button class="btn" mat-fab color="warn">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                                 <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>
