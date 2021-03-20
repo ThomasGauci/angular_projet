@@ -32,11 +32,13 @@ img {
 }
 
 .btncard{
-  width: 49%;
+  width: 100%;
+  background-color: whitesmoke;
 }
 .onglets {
   width: 100%;
   border-radius: 1px;
+  background-color: whitesmoke;
 }
 
 .mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {

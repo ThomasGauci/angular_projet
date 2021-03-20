@@ -58,7 +58,7 @@
                     </mat-form-field>
                 </div>
                 <div class="col-3 pt-4 pl-4">
-                    <button mat-raised-button (click)="add()" class="onglet">Ajouter un devoir</button>
+                    <button mat-raised-button (click)="add()" class="onglet" style="background-color: whitesmoke;"  >Ajouter un devoir</button>
                 </div>
             </div>
         </mat-card>
@@ -79,8 +79,9 @@
                     
                                     <mat-card-content>
                                         <span>Matiere : {{element.titre}} </span><br>
-                                        <span >Date de rendu : {{element.dateDeRendu | date}} </span><br>
+                                        <hr>
                                         <div [hidden]="!element.detail">
+                                            <span >Date de rendu : {{element.dateDeRendu | date}} </span><br>
                                             <div *ngIf="element.noter == false">
                                                 <span>Note obtenu : NON NOTE </span><br>
                                             </div>
@@ -95,14 +96,12 @@
                                             </div>
                                         </div>
                                     </mat-card-content>
-                                    <mat-card-actions>
-                                        <button class= "row"  style="margin-bottom: 5px;width: 100%;" [hidden]="!element.detail" mat-raised-button  (click)="element.noter = !element.noter" >Noter</button>
-                                        <div style="text-align: center;">
-                                        <button class="btncard" mat-raised-button (click)="delete(element)" >
+                                    <mat-card-actions style="text-align: center;">
+                                        <button class= "row"  style="margin-bottom: 5px;width: 47%;" [hidden]="!element.detail" mat-raised-button  (click)="element.noter = !element.noter" >Noter</button>
+                                        <button class="col-2" style="background-color: whitesmoke;" mat-raised-button (click)="delete(element)" >
                                             delete
                                         </button>
-                                        <button class="btncard"  mat-raised-button (click)="element.detail = !element.detail" >Detail</button>
-                                    </div>
+                                        <button class="col-2" style="background-color: whitesmoke;"  mat-raised-button (click)="element.detail = !element.detail" >Detail</button>
                                     </mat-card-actions>
                                 </mat-card>
                             </div>
@@ -129,8 +128,10 @@
                                         <mat-card-subtitle>{{element.auteur}}</mat-card-subtitle>
                                     </mat-card-header>
                             <mat-card-content> 
-                                <span>Date de rendu : {{element.dateDeRendu | date}} </span><br>
+                                <span>Matiere : {{element.titre}} </span><br>
+                                        <hr>
                                 <div [hidden]="!element.detail">
+                                <span>Date de rendu : {{element.dateDeRendu | date}} </span><br>
                                     <hr>
                                 <div *ngIf="element.note != undefined">
                                     <span>Note obtenu : {{element.note}}/20</span><br>
@@ -143,12 +144,12 @@
                                 </div>
                             </mat-card-content>
                             <mat-card-actions>
-                                <div style="text-align: center;">
-                                    <button mat-raised-button (click)="delete(element)" class="btncard col">
+                                <div  style="text-align: center; width: 100%;">
+                                    <button class="col-2" style="width: 47%!important;background-color: whitesmoke;" mat-raised-button (click)="delete(element)" >
                                         Delete
                                     <!-- <mat-icon>delete</mat-icon> -->
                                     </button>
-                                <button mat-raised-button (click)="element.detail = !element.detail" class="btncard col">Detail</button>
+                                <button class="col-2" style="width: 47%!important;background-color: whitesmoke;" mat-raised-button (click)="element.detail = !element.detail">Detail</button>
                                 </div>            
                         </mat-card-actions>
                     </mat-card>
