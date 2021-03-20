@@ -45,6 +45,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssignmentsComponent } from './assignments/assignments.component'; 
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { HttpClientModule } from '@angular/common/http';
 		MatTreeModule,
     FormsModule,
     ReactiveFormsModule,
-	HttpClientModule
+	HttpClientModule,
+	FlexLayoutModule,
 	
   ],
   providers: [],

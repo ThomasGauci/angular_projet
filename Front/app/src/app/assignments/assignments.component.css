@@ -1,59 +1,48 @@
 
-  .transition{
-    transition: 1s
-    }
-  .rendu-header-image {
-    background-size: cover;
-
-  }
-
-  .mat-card-avatar {
-    box-shadow: -6px -6px -12px #b8b9be,6px 6px -12px #fff!important;
-  }
+.image {
+  background-size: cover;
+}
 
 mat-card {
+  background: #f3eded;
+  background-size: cover;
   overflow: auto;
   width: calc(100% - 30px);
   height: calc(100% - 30px);
-  box-shadow: 6px 6px 12px #b8b9be,-6px -6px 12px #fff!important;
-  border-radius: .55rem!important;
-  margin-bottom: 3rem!important;
+  margin : 10px;
 }
 
-.transparentback {
-  background-color: #ffffff00!important;
-  box-shadow: None!important;
-}
 mat-button-toggle-group {
     margin-left: 12px;
   }
 
-  .example-header-image {
-    background-size: cover;
-  }
-
-  .onglets {
-    box-shadow: -6px -6px -12px #b8b9be,6px 6px -12px #fff!important;
-    border-radius: .55rem!important;
-}
-html {
-  overflow: scroll;
-  overflow-x: hidden;
-}
-::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
-}
-/* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-  background: #FF0000;
+img.mat-card-image{
+  background-size: cover;  
 }
 
-.badge-secondary {
-  box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
-  background-color: transparent;
+img {
+  opacity: 0.9;
+}
+.content {
+  padding: 16px;
 }
 
-mat-card-image{
-  border-radius: .55rem!important;
+.content > mat-card {
+  width: 200px;
+}
+
+.btncard{
+  width: 49%;
+}
+.onglets {
+  width: 100%;
+  border-radius: 1px;
+}
+
+.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
+  margin: 0 2px;
+}
+
+.pl-5, .px-5 {
+  padding-top: 36px!important;
 }

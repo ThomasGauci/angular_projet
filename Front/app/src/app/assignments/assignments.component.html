@@ -1,13 +1,13 @@
 <div class="onglets" class="row" style="height:100%">
     <div class="col pl-5 pt-4">
         <div class="row">
-            <button (click)="changement(1)" mat-raised-button>Ajouter un devoir</button>
+            <button class="onglets" (click)="changement(1)" mat-raised-button>Ajouter un devoir</button>
         </div>
         <div class="row pt-4">
-            <button (click)="changement(2)" mat-raised-button>Devoir non rendu</button>
+            <button class="onglets" (click)="changement(2)" mat-raised-button>Devoir non rendu</button>
         </div>
         <div class="row pt-4">
-            <button (click)="changement(3)" mat-raised-button>Devoir rendu</button>
+            <button class="onglets" (click)="changement(3)" mat-raised-button>Devoir rendu</button>
         </div>
     </div>
     <div  *ngIf="fenetre==1" class="col-10 pt-4" style="height:100%">
@@ -48,7 +48,7 @@
                 <div class="col-3 pt-4 pl-4">
                     <mat-form-field appearance="outline">
                         <mat-label class="text-muted" >Note</mat-label>
-                        <input matInput [(ngModel)]="note" name="auteur">
+                        <input matInput [(ngModel)]="note" name="note" type="number" min="0" max="20">
                     </mat-form-field>
                 </div>
                 <div class="col-3 pt-4 pl-4">
@@ -63,84 +63,98 @@
             </div>
         </mat-card>
     </div>
-    <div *ngIf="fenetre==2" class="col-10 pt-4" style="height:100%">
-        <mat-card class="transparentback">
-            <!-- <mat-card-title>Devoir non rendu</mat-card-title> -->
-            <div  *ngFor="let element of assignments">
-                <div *ngIf="!element.rendu">
+    <div class="content" *ngIf="fenetre==2" class="col-10 pt-4" style="height:100%">
+        <div fxLayout="row wrap" fxLayoutGap="16px grid" >
+            <!-- <mat-card> -->
+                    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let element of getAssignementNonRenduFiltrer()">
+                        <!-- <div *ngIf="!element.rendu"> -->
+                            <div class="row pl-4 pt-2" >
+                                <mat-card>
+                                    <img mat-card-image  *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
+                                    <mat-card-header>
+                                        <div mat-card-avatar class="image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}"></div>
+                                        <mat-card-title>{{element.nom}}</mat-card-title>
+                                        <mat-card-subtitle>{{element.auteur}}</mat-card-subtitle>
+                                    </mat-card-header>
+                    
+                                    <mat-card-content>
+                                        <span>Matiere : {{element.titre}} </span><br>
+                                        <span >Date de rendu : {{element.dateDeRendu | date}} </span><br>
+                                        <div [hidden]="!element.detail">
+                                            <div *ngIf="element.noter == false">
+                                                <span>Note obtenu : NON NOTE </span><br>
+                                            </div>
+                                            <hr>
+                                            <p>
+                                            Remarque : {{element.remarque}}
+                                            </p>
+                                            <hr>
+                                            <div  class="md-form row" *ngIf="element.noter == true">
+                                                <div class="col"><input [(ngModel)]="note" type="number" class="form-control" mdbInput min="0" max="20"></div>
+                                                <div class="col"><button style="width: 100%;" mat-raised-button (click)="update(element,note)" (click)="element.rendu = true" (click)="element.note = note">Valider</button></div>   
+                                            </div>
+                                        </div>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button class= "row"  style="margin-bottom: 5px;width: 100%;" [hidden]="!element.detail" mat-raised-button  (click)="element.noter = !element.noter" >Noter</button>
+                                        <div style="text-align: center;">
+                                        <button class="btncard" mat-raised-button (click)="delete(element)" >
+                                            delete
+                                        </button>
+                                        <button class="btncard"  mat-raised-button (click)="element.detail = !element.detail" >Detail</button>
+                                    </div>
+                                    </mat-card-actions>
+                                </mat-card>
+                            </div>
+                    </div>        
+            <!-- </mat-card> -->
+        </div>
+    </div>
+    <div class="content" *ngIf="fenetre==3" class="col-10 pt-4" style="height:100%">
+            <div fxLayout="row wrap" fxLayoutGap="16px grid" >
+                <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let element of getAssignementRenduFiltrer()">
                     <div class="row pl-4 pt-2" >
                         <mat-card>
-                            <mat-card-header>
-                                <div mat-card-avatar class="example-header-image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}"></div>
-                                <mat-card-title>{{element.nom}}</mat-card-title>
-                                <mat-card-subtitle>{{element.auteur}}</mat-card-subtitle>
-                              </mat-card-header>
-                              <img mat-card-image  *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
-                              <mat-card-content>
-                                <span>Matiere : {{element.titre}} </span><br>
-                                <span >Date de rendu : {{element.dateDeRendu | date}} </span><br>
-                                <div [hidden]="!element.detail">
-                                    <div *ngIf="element.noter == false">
-                                        <span>Note obtenu : NON NOTE </span><br>
-                                    </div>
-                                    <div class="md-form" *ngIf="element.noter == true">
-                                        <input [(ngModel)]="note" type="number" class="form-control" mdbInput min="0" max="20">
-                                        <button mat-raised-button (click)="update(element,note)" (click)="element.rendu = true" (click)="element.note = note" color="primary">Valider</button>
-                                    </div>
-                                   
-                                     
-                                    <p>
-                                      {{element.remarque}}
-                                    </p>
+                            <!-- <mat-card-header>
+                                <div mat-card-avatar class="image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}">
                                 </div>
-                              </mat-card-content>
-                              <mat-card-actions>
-                                <button (click)="delete(element)" mat-fab color="warn">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                                <button [hidden]="!element.detail" mat-raised-button  (click)="element.noter = !element.noter" color="primary">Noter</button>
-                                <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>
-                            </mat-card-actions>
-                        </mat-card>
-                    </div>
-                </div>
-            </div>
-        </mat-card>
-    </div>
-    <div *ngIf="fenetre==3" class="col-10 pt-4" style="height:100%">
-        <mat-card class="transparentback">
-            <!-- <mat-card-title>Devoir rendu</mat-card-title> -->
-            <div *ngFor="let element of assignments">
-                <div *ngIf="element.rendu">
-                    <div class="row pl-4 pt-2">
-                        <mat-card>
-                            <mat-card-header>
-                                <div mat-card-avatar class="example-header-image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}"></div>
                                 <mat-card-title>{{element.auteur}}</mat-card-title>
                                 <mat-card-subtitle>{{element.nom}}</mat-card-subtitle>
-                              </mat-card-header>
-                              <img mat-card-image *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
-                              <mat-card-content>
-                                <span>Date de rendu : {{element.dateDeRendu | date }} </span><br>
+                            </mat-card-header>
+                            <img mat-card-image *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours"> -->
+                            <img mat-card-image  *ngIf="!!element.matiere" src={{element.matiere.imagecours}} alt="cours">
+                                    <mat-card-header>
+                                        <div mat-card-avatar class="image" *ngIf="!!element.matiere" [ngStyle]="{'background-image': 'url(' +element.matiere.imageprof + ')'}"></div>
+                                        <mat-card-title>{{element.nom}}</mat-card-title>
+                                        <mat-card-subtitle>{{element.auteur}}</mat-card-subtitle>
+                                    </mat-card-header>
+                            <mat-card-content> 
+                                <span>Date de rendu : {{element.dateDeRendu | date}} </span><br>
                                 <div [hidden]="!element.detail">
-                                    <div *ngIf="element.note != undefined">
-                                        <span>Note obtenu : {{element.note}}/20</span><br>
-                                    </div>
-                                    <p>
-                                      {{element.remarque}}
-                                    </p>
+                                    <hr>
+                                <div *ngIf="element.note != undefined">
+                                    <span>Note obtenu : {{element.note}}/20</span><br>
                                 </div>
-                              </mat-card-content>
+                                <hr>
+                                <p>
+                                    Remarque : {{element.remarque}}
+                                </p>
+                                <hr>
+                                </div>
+                            </mat-card-content>
                             <mat-card-actions>
-                                <button (click)="delete(element)" class="btn" mat-fab color="warn">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                                <button mat-raised-button (click)="element.detail = !element.detail" color="primary">Detail</button>
-                            </mat-card-actions>
-                        </mat-card>
-                    </div>
+                                <div style="text-align: center;">
+                                    <button mat-raised-button (click)="delete(element)" class="btncard col">
+                                        Delete
+                                    <!-- <mat-icon>delete</mat-icon> -->
+                                    </button>
+                                <button mat-raised-button (click)="element.detail = !element.detail" class="btncard col">Detail</button>
+                                </div>            
+                        </mat-card-actions>
+                    </mat-card>
                 </div>
-            </div>
-        </mat-card>
+            </div>        
+        <!-- </mat-card> -->
+        </div>
     </div>
 </div>

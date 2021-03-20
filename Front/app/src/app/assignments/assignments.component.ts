@@ -163,4 +163,11 @@ export class AssignmentsComponent implements OnInit {
       }
     });
   }
+  getAssignementRenduFiltrer(){
+    return this.assignments.filter((a) => a.rendu);
+  }
+
+  getAssignementNonRenduFiltrer(){
+    return this.assignments.filter((a) => !a.rendu);
+  }
 }
