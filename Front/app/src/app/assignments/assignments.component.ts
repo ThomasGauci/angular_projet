@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AssignementService } from '../assignementService/assignement.service';
 import { Assignment } from './assignment.model';
 
+
 @Component({
   selector: 'app-assignments',
   templateUrl: './assignments.component.html',
@@ -24,6 +25,8 @@ export class AssignmentsComponent implements OnInit {
   imgcours : string ='';
   imgprof : string ='';
   assignments: Array<Assignment> = [];
+
+
  matieres = [{title:'Analyse des sentiments',imagecours:'/assets/matieres/analysesentiment.jpg', imageprof : '/assets/prof/Serena-Villata.jpg'}
 ,{title:'Gestion de projet',imagecours:'/assets/matieres/gestiondeprojet.jpg', imageprof : '/assets/prof/Michel-Winter.jpg'}
 ,{title:'Recherche d\'informations',imagecours:'/assets/matieres/rechercheinfo.jpg', imageprof : '/assets/prof/Elena-Cabrio.jpg'}
@@ -68,6 +71,7 @@ export class AssignmentsComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private assignementService: AssignementService) { }
 
   ngOnInit(): void {
+    
     // let _ = this
     // this.assignments = this.assignments.map((a : Assignment) => {
     //   console.log(a.matiere)

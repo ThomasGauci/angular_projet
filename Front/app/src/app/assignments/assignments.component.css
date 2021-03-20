@@ -38,7 +38,8 @@ img {
 .onglets {
   width: 100%;
   border-radius: 1px;
-  background-color: whitesmoke;
+  background-color: whitesmoke!important;
+  
 }
 
 .mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {

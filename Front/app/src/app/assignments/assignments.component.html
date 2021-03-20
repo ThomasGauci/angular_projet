@@ -11,9 +11,9 @@
         </div>
     </div>
     <div  *ngIf="fenetre==1" class="col-10 pt-4" style="height:100%">
-        <mat-card>
+        <mat-card style="max-width: 700px; height: auto;">
             <!-- <mat-card-title>Ajout d'un devoir</mat-card-title> -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col pt-4 pl-4">
                     <mat-form-field  appearance="outline">
                         <mat-label>Matières</mat-label>
@@ -42,7 +42,7 @@
                         <mat-label class="text-muted" >Auteur</mat-label>
                         <input matInput [(ngModel)]="auteur" name="auteur">
                     </mat-form-field>
-                </div>
+                </div> 
             </div>
             <div class="row">
                 <div class="col-3 pt-4 pl-4">
@@ -60,7 +60,53 @@
                 <div class="col-3 pt-4 pl-4">
                     <button mat-raised-button (click)="add()" class="onglet" style="background-color: whitesmoke;"  >Ajouter un devoir</button>
                 </div>
-            </div>
+            </div> -->
+            <mat-horizontal-stepper style="background-color: transparent;">
+                <mat-step label="Step 1">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-muted" >Nom du devoir</mat-label>
+                        <input matInput [(ngModel)]="nomDevoir" name="nom">
+                        <mat-icon matSuffix class="secondary-text material-icons color_white">perm_identity</mat-icon>
+                    </mat-form-field>
+                    <hr>
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-muted" >Auteur du devoir</mat-label>
+                        <input matInput [(ngModel)]="auteur" name="auteur">
+                    </mat-form-field>
+                    <hr>
+                    <mat-form-field  appearance="outline">
+                        <mat-label>Matières</mat-label>
+                        <mat-select [(ngModel)]="matiere">
+                        <mat-option *ngFor=" let matiere of matieres" [value]="matiere.title" >{{matiere.title}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <hr>
+                    <button class="onglet" mat-raised-button matStepperNext >Next</button>
+                </mat-step>     
+              
+                <mat-step label="Step 2">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-muted" >Date de rendu</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <hr>
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-muted" >Note</mat-label>
+                        <input matInput [(ngModel)]="note" name="note" type="number" min="0" max="20">
+                    </mat-form-field>
+                    <hr>
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-muted" >Remarques</mat-label>
+                        <input matInput [(ngModel)]="remarque" name="remarque">
+                    </mat-form-field>
+                    <hr>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button (click)="add()" class="onglet" >Ajouter un devoir</button>
+                </mat-step>
+                
+              </mat-horizontal-stepper>
         </mat-card>
     </div>
     <div class="content" *ngIf="fenetre==2" class="col-10 pt-4" style="height:100%">
