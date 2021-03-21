@@ -1,5 +1,7 @@
 # angular_projet
 
+Projet réalisé par Gauci Thomas et Mosbah Yasmin.
+
 ## Commandes :
 
 ### Project setup
