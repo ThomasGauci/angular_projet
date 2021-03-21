@@ -62,7 +62,7 @@
                 </div>
             </div> -->
             <mat-horizontal-stepper style="background-color: transparent;">
-                <mat-step label="Step 1">
+                <mat-step label="Etape 1">
                     <mat-form-field appearance="outline">
                         <mat-label class="text-muted" >Nom du devoir</mat-label>
                         <input matInput [(ngModel)]="nomDevoir" name="nom">
@@ -81,10 +81,10 @@
                         </mat-select>
                     </mat-form-field>
                     <hr>
-                    <button class="onglet" mat-raised-button matStepperNext >Next</button>
+                    <button class="onglet" mat-raised-button matStepperNext >Suivant</button>
                 </mat-step>     
               
-                <mat-step label="Step 2">
+                <mat-step label="Etape 2">
                     <mat-form-field appearance="outline">
                         <mat-label class="text-muted" >Date de rendu</mat-label>
                         <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date">
@@ -102,7 +102,7 @@
                         <input matInput [(ngModel)]="remarque" name="remarque">
                     </mat-form-field>
                     <hr>
-                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperPrevious>Retour</button>
                     <button mat-raised-button (click)="add()" class="onglet" >Ajouter un devoir</button>
                 </mat-step>
                 
